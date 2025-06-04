@@ -1,3 +1,4 @@
+
 #!/bin/bash
 #SBATCH -p short
 #SBATCH --job-name=salmon_quant
@@ -21,19 +22,24 @@ for R1 in *_R1_001.fastq.gz; do
     # Find matching R2
     R2="${R1/_R1_/_R2_}"
 
-    # Extract sample name: e.g., DMSO-1_5days -> DMSO1_5days
-    sample=$(echo "$R1" | sed -E 's/^([A-Za-z]+)-([0-9]+)_([0-9]+days).*/\1\2_\3/')
+    # Fixed sample name extraction to handle alphanumeric prefixes like E6R
+    sample=$(echo "$R1" | sed -E 's/^([A-Za-z0-9]+)-([0-9]+)_([0-9]+days).*/\1\2_\3/')
 
     echo "Processing: $sample | R1: $R1 | R2: $R2"
 
-    salmon quant \
-        -i "$INDEX_DIR" \
-        -l A \
-        -1 "$FASTQ_DIR/$R1" \
-        -2 "$FASTQ_DIR/$R2" \
-        -p 8 \
-        --validateMappings \
-        -o "$OUTPUT_DIR/$sample"
+    # Verify both files exist before running salmon
+    if [[ -f "$R1" && -f "$R2" ]]; then
+        salmon quant \
+            -i "$INDEX_DIR" \
+            -l A \
+            -1 "$FASTQ_DIR/$R1" \
+            -2 "$FASTQ_DIR/$R2" \
+            -p 8 \
+            --validateMappings \
+            -o "$OUTPUT_DIR/$sample"
+    else
+        echo "Error: Missing R1 or R2 file for $sample"
+    fi
 done
 
 echo "Batch 4 processing complete."
