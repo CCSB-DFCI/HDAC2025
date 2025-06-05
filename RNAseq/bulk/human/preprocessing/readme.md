@@ -1,11 +1,11 @@
-# RNA-seq Data Preprocessing and Quantification (Batches 1, 3, and 4)
+# RNA-seq Preprocessing and Quantification of Human Neuroblastoma Cell Lines: Dose- and Time-Dependent Effects Across Batches 1–4 
 
-This repository documents the preprocessing and quantification steps for three major RNA-seq batches (batch1, batch2, batch3 & batch4) from the Neuroblastoma project, using Salmon v1.8.0 and the GRCh38 transcriptome reference.
+This repository documents the standardized preprocessing & quantification pipeline applied to four batches of human SKNBE2C neuroblastoma RNA-seq data. Here, we investigated the transcriptomic responses to varying doses of DMSO, TSA, & E6R across multiple experimental batches, using both single-end and paired-end sequencing strategies, and including both short-term (16 hours) and long-term (120 hours) treatments. All analyses employ the latest Salmon quantification (version 1.8.0) methods & a consistent GRCh38 reference to enable robust, cross-batch comparisons of gene expression & differential response to treatment.
 
 1. **Batch 1**: Single-End, Dual-Lane Sequencing
 
-# Cell Line: SKNBE2C neuroblastoma cells after 16 hours treatment 
-# Treatments (16 hrs timepoint):
+## Cell Line: SKNBE2C neuroblastoma cells after 16 hours treatment 
+## Treatments (16 hrs timepoint):
 - DMSO (16h, vehicle control): 3 replicates
 - TSA (1 µM, 16h): 3 replicates
 - E6R (25 µM, 16h): 3 replicates
@@ -24,8 +24,8 @@ Output directories were named using the condition and replicate (e.g., DMSO1_bat
 
 2. **Batch 2**: Paired-End, 2025 Sequencing
 
-# Cell Line: SKNBE2C neuroblastoma cells 
-# Treatments (16 hrs timepoint):
+## Cell Line: SKNBE2C neuroblastoma cells 
+## Treatments (16 hrs timepoint):
 - DMSO (16h, vehicle control): 3 replicates
 - TSA (0.01 µM, 16h): 3 replicates
 - E6R (0.25 µM, 16h): 3 replicates
@@ -33,25 +33,25 @@ Output directories were named using the condition and replicate (e.g., DMSO1_bat
 
 4. **Batches 3 & 4**: Paired-End, 2025 Sequencing
 
-###  Human Batch 3 (New Data)
-# Cell Line: SKNBE2C neuroblastoma cells
-# Treatments (16 hrs timepoint):
+##  Human Batch 3 (New Data)
+## Cell Line: SKNBE2C neuroblastoma cells
+## Treatments (16 hrs timepoint):
 - DMSO (vehicle control): 3 replicates
 - TSA (0.1 µM): 3 replicates
 - E6R (1 µM): 3 replicates
 
-# Analysis:
+## Analysis:
 - Processed with the updated pipeline (Salmon v1.8.0, GRCh38 reference) for consistency with Batches 1–2.
 - Focuses on short-term treatment effects (16 h) for comparison with earlier batches.
 
-### Human Batch 4 (New Data)
-# Cell Line: SKNBE2C neuroblastoma cells
-# Treatments (120 hrs timepoint):
+## Human Batch 4 (New Data)
+## Cell Line: SKNBE2C neuroblastoma cells
+## Treatments (120 hrs timepoint):
 - DMSO (vehicle control): 3 replicates
 - TSA (0.01 µM): 3 replicates
 - E6R (0.25 µM): 3 replicates
 
-# Analysis:
+## Analysis:
 - Processed with the same updated pipeline as all other batches.
 - Linked to cell invasion assays initiated after 120 h of compound incubation.
 - Will be analyzed independently from 16 h timepoints but compared later for time-dependent effects.
@@ -79,6 +79,7 @@ All batches were quantified using Salmon v1.8.0 with the same human transcriptom
 # Output: For each sample, a quant.sf file with transcript-level quantification, ready for downstream analysis.
 
 ## Output Structure
+
 salmon_output_batchX/
 ├── [SAMPLE]/
 │ ├── quant.sf # Transcript-level quantification
