@@ -132,3 +132,7 @@ plotMA(results_list$E6R$shrunk, main = "E6R vs DMSO")
 dev.off()
 
 print("Batch3 DESeq2 analysis complete!")
+
+sink(file.path(output_dir, "session_info_batch3.txt"))
+sessionInfo()
+sink()
