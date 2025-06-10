@@ -135,5 +135,6 @@ dev.off()
 
 print("Batch4 DESeq2 analysis complete!")
 
-
-
+sink(file.path(output_dir, "session_info_batch4.txt"))
+sessionInfo()
+sink()
