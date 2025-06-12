@@ -2,7 +2,7 @@
 tx2gene_path <- "/n/data2/dfci/genetics/vidal/HDAC_project/RNA_seq/human_reference_genome/GTF_file/tx2gene_gencode_v38.csv"
 
 #quant_file <- "/path/to/any/sample/quant.sf"  #Use any one quant.sf file for checking
-#Usually sufficient as all of our quantifications (quant.sf) were generated with the same reference transcriptome & the same Salmon index.
+#Usually sufficient as all of our quantifications (quant.sf) were generated with the same reference transcriptome & the same Salmon index. 
 quant_file <- "/n/data2/dfci/genetics/vidal/HDAC_project/RNA_seq/human_SKNBE2C_16hrs_batch3_27022025/salmon_output_batch3/E6R2_16hrs/quant.sf"
 
 #Load files
