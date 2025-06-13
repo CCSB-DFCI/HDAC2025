@@ -79,7 +79,7 @@ walk(batch_dirs, function(batch_dir) {
       txi$effLen <- to_matrix(txi$effLen, sample_name)
       
       # ------------------------------
-      # Why we check for txi$effLen?!
+      # Why do we check for txi$effLen?!
       # ------------------------------
       #In some cases (e.g., if the EffectiveLength column is missing/NA in quant.sf, 
       #or all values are zero), tximport will return effLen = NULL.
@@ -109,7 +109,7 @@ walk(batch_dirs, function(batch_dir) {
 #Scan our batch directories, check for quant_aggr_by_gene.tsv files & print file size/number of genes per file:
 #Get info on each aggregated file: 
 
-  file_info <- map_dfr(batch_dirs, function(batch_dir) {
+file_info <- map_dfr(batch_dirs, function(batch_dir) {
   tsv_files <- list.files(batch_dir, pattern = "quant_aggr_by_gene.tsv$", recursive = TRUE, full.names = TRUE)
   
   map_dfr(tsv_files, function(f) {
@@ -129,3 +129,30 @@ walk(batch_dirs, function(batch_dir) {
 
 #Print result
 print(file_info, n = Inf) #37951 genes 
+
+#Quick sanity check: Every sample directory with a quant.sf also has a quant_aggr_by_gene.tsv
+#Gather quant.sf & quant_aggr_by_gene.tsv paths
+check_df <- map_dfr(batch_dirs, function(batch_dir) {
+  quant_paths <- list.files(batch_dir, pattern = "quant\\.sf$", recursive = TRUE, full.names = TRUE)
+  
+  tibble(
+    sample = basename(dirname(quant_paths)),
+    batch = basename(batch_dir),
+    quant_sf = quant_paths,
+    quant_aggr = file.path(dirname(quant_paths), "quant_aggr_by_gene.tsv"),
+    aggr_exists = file.exists(file.path(dirname(quant_paths), "quant_aggr_by_gene.tsv"))
+  )
+})
+
+#Show missing ones (if any)
+missing_aggr <- filter(check_df, !aggr_exists)
+
+#Report
+if (nrow(missing_aggr) == 0) {
+  message("All quant.sf files have corresponding quant_aggr_by_gene.tsv files.")
+} else {
+  message("Missing quant_aggr_by_gene.tsv for the following samples:")
+  print(missing_aggr)
+}
+
+write_csv(check_df, "quant_aggr_sanity_check.csv")
