@@ -23,7 +23,7 @@ SKNBE2C neuroblastoma cells after 16 hours of treatment.
 - **Sample naming:**  
   Output directories were named as `[Condition][Replicate]_batch1` (e.g., `DMSO1_batch1`, `TSA3_batch1`).
 
-## Batch 2: 
+## Batch 2: Paired-End; Single-Lane Sequencing 
 
 ### Cell Line
 SKNBE2C neuroblastoma cells after 16 hours of treatment.
@@ -34,11 +34,11 @@ SKNBE2C neuroblastoma cells after 16 hours of treatment.
 - E6R (0.25 µM, 16h): 3 replicates
 
 ### Processing Details
-- **Sequencing:** Paired-end, single-lane.
+- **Sequencing:** Paired-end, single-lane (L002).
 - **Input FASTQ pattern:**  
   `*_R1_001.fastq.gz` and `*_R2_001.fastq.gz`
 - **Preprocessing:**  
-  No merging required. For each sample, R1 and R2 files were paired by sample name.
+  No merging required. For each sample, R1 & R2 files were paired by sample name.
 - **Quantification:**  
   Salmon was run in paired-end mode (`-1` and `-2` flags).
 - **Sample naming:**  
